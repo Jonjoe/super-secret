@@ -2,11 +2,11 @@ class Recipient < ApplicationRecord
   has_many :emails
 
   def top_words(max)
-    return $raw.sort_by(&:last).reverse[0...max]
+    return self.filtered_dictionary.sort_by(&:last).reverse[0...max]
   end
 
   def unique_words
-    return $raw.find_all{|key,value|value == 1}
+    return self.filtered_dictionary.find_all{|key,value|value == 1}
   end
 
   def recieved_this_month
@@ -20,8 +20,7 @@ class Recipient < ApplicationRecord
       .count
   end
 
-  private
-  def raw_dictionary
+  def filtered_dictionary
     forbidden_values = [
       "-",
       "?",
@@ -33,10 +32,12 @@ class Recipient < ApplicationRecord
       "/",
     ]
 
-    $raw = self.dictionary
+    raw = self.dictionary
 
     forbidden_values.each do |item|
-      $raw.delete(item)
+      raw.delete(item)
     end
+
+    return raw
   end
 end
