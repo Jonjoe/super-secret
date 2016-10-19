@@ -23,6 +23,18 @@ Application has the following features
 - Scope to get count of emails recieved in current month.
 - Comprehensive set of seeded datasets to populate the schema.
 
+## Application Setup
+- Make sure you have up-to-date postgres, rails and ruby.
+- Clone repo and bundle install.
+- Database depends on environment variables: ENV["PG_USERNAME"] & ENV["PG_PASSWORD"].
+- Generate the database and run the migrations.
+- Seed the database with the seed data.
+- Spin up the server and your ready to rock!
+
+## Application Usage
+- To start import the new data: ``` rake perform_upload ```
+- Then run the analytics: ``` rake analytics ```
+
 ## What I would do better / liked to have done?
 - If I had more time I would have used Mongoid to create a Key/Value store against the emails and recipients. I would have used Mongoid’s built in relationship management to handle the email > recipient relationship on a flat file system. This would have increased the write speeds significantly.
 - I would have liked to have written some comprehensive tests to make sure the analytics is 100% accurate.
