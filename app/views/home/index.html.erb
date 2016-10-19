@@ -1,0 +1,45 @@
+<header class="container grid">
+  <%= form_tag root_path, method: :get do |form| %>
+    <input
+      type="text"
+      class="inline-input"
+      name="query"
+      placeholder="search emails ..."
+    >
+    <input type="submit" value="Search">
+  <% end %>
+</header>
+
+<br>
+
+<div class="container grid">
+  <% @recipients.each do |recipient| %>
+    <article class="card">
+      <header class="card__header">
+        <h5>
+          <%= recipient.email_address %>
+        </h5>
+      </header>
+
+      <section class="card__body">
+        <p><%= recipient.recieved_this_month %> Emails recieved this month</p>
+
+        <ul class="no-list">
+          <% recipient.top_words(5).each do |word| %>
+            <li><%= word[0] %> - <%= word[1] %></li>
+          <% end %>
+        </ul>
+      </section>
+
+      <footer class="card__footer">
+        <a href="<%= recipient_path(recipient) %>" class="button button--primary">View Recipient</a>
+      </footer>
+    </article>
+  <% end %>
+</div>
+
+<br>
+
+<footer class="container grid">
+  <%= will_paginate @recipients %>
+</footer>

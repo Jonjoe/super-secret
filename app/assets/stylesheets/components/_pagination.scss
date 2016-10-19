@@ -1,0 +1,10 @@
+.pagination {
+  display:flex;
+  .previous_page {}
+  .next_page {}
+  a, span, em {
+    box-sizing: border-box;
+    padding:5px 15px;
+    border:1px solid #ccc;
+  }
+}

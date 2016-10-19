@@ -1,0 +1,8 @@
+.button {
+  padding:5px 15px;
+  text-decoration: none;
+  &--primary {
+    background:$primary;
+    color:white;
+  }
+}
